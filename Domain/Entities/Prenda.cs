@@ -16,7 +16,7 @@ namespace Domain.Entities;
         
 
         public ICollection<InsumoPrenda> InsumoPrendas { get; set; }
-        public ICollection<Insumo> Insumos { get; set; }
+        // public ICollection<Insumo> Insumos { get; set; }
 
         public ICollection<Inventario> Inventarios { get; set; }
 

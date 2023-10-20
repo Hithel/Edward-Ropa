@@ -1,9 +1,11 @@
 
 namespace Domain.Entities;
-    public class InsumoPrenda 
+    public class InsumoPrenda : BaseEntity
     {
-        public int IDInsumoFK { get; set; }
+        public int IdInsumoFK { get; set; }
         public Insumo Insumo { get; set; }
         public int IdPrendaFk { get; set; }
         public Prenda Prenda  { get; set; }
+
+        public int Cantidad { get; set; }
     }

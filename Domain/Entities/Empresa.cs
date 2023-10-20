@@ -8,5 +8,5 @@ namespace Domain.Entities;
         public string RepresentanteLegal { get; set; }
         public DateTime FechaCreacion { get; set; }
         public int IdMunicipioFk { get; set; }
-        public Municipio Municipion { get; set; }
+        public Municipio Municipio { get; set; }
     }

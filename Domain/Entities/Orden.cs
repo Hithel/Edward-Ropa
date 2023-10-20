@@ -13,4 +13,5 @@ namespace Domain.Entities;
 
         public ICollection<DetalleOrden> DetalleOrdenes { get; set; }
         
+        
     }

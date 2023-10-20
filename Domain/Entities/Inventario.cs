@@ -10,7 +10,7 @@ namespace Domain.Entities;
         public double ValorVtaUsd { get; set; }
 
         public ICollection<InventatioTalla> InventatioTallas { get; set; }
-        public ICollection<Talla> Tallas { get; set; }
+        // public ICollection<Talla> Tallas { get; set; }
 
 
     }

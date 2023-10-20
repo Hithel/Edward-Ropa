@@ -11,7 +11,9 @@ namespace Domain.Entities;
         public int CantidadProducir { get; set; }
         public int IdColorFK { get; set; }
         public Color Color  { get; set; }
+
         public int CantidadProducidad { get; set; }
+        
         public int IdEstadoFk { get; set; }
         public Estado Estado { get; set; }
 
