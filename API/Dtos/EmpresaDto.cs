@@ -1,7 +1,9 @@
 
 
+using Domain.Entities;
+
 namespace API.Dtos;
-    public class EmpresaDto
+    public class EmpresaDto : BaseEntity
     {
         public int Nit { get; set; }
         public string RazonSocial { get; set; }

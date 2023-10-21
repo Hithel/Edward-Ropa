@@ -43,4 +43,23 @@ namespace Application.Repository;
         return await _context.Ordenes
         .FirstOrDefaultAsync(p => p.Id == id);
     }
+
+    public async Task<IEnumerable<Object>> GetPrendasProduccion(int numero)
+    {
+        var result = await (
+            from o in _context.Ordenes
+            join e in _context.Estado on o.IdEstadoFk equals e.Id
+            join p in _context.Prendas on o.Id equals p.IdEstadoFk
+            where o.Id == numero
+            where e.Descripcion == "Produccion"
+            select new 
+            {
+                prenda = p.Nombre,
+                Estado = e.Descripcion
+            }
+
+        ).ToListAsync();
+
+        return result;
+    }
 }

@@ -1,6 +1,8 @@
 
+using Domain.Entities;
+
 namespace API.Dtos;
-    public class DepartamentoDto
+    public class DepartamentoDto : BaseEntity
     {
         public string Nombre { get; set; }
 

@@ -1,9 +1,10 @@
 
 
 using System.ComponentModel.DataAnnotations;
+using Domain.Entities;
 
 namespace API.Dtos;
-public class RegisterDto
+public class RegisterDto : BaseEntity
 {
     [Required]
     public string Email { get; set; }

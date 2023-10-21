@@ -35,6 +35,16 @@ namespace API.Controllers;
         return mapper.Map<List<PrendaDto>>(entidad);
     }
 
+    [HttpGet("Consulta3B")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<Object>>> GetPrendasProteccion()
+    {
+        var entidad = await unitofwork.Prenda.GetPrendasProteccion();
+        return mapper.Map<List<Object>>(entidad);
+    }
+
 
     [HttpGet]
     [MapToApiVersion("1.1")]
@@ -60,6 +70,22 @@ namespace API.Controllers;
         }
         return this.mapper.Map<PrendaDto>(entidad);
     }
+
+    [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Prenda>> Post(PrendaDto entidadDto)
+        {
+            var entidad = this.mapper.Map<Prenda>(entidadDto);
+            this.unitofwork.Prenda.Add(entidad);
+            await unitofwork.SaveAsync();
+            if(entidad == null)
+            {
+                return BadRequest();
+            }
+            entidadDto.Id = entidad.Id;
+            return CreatedAtAction(nameof(Post), new {id = entidadDto.Id}, entidadDto);
+        }
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]

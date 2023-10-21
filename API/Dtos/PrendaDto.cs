@@ -1,7 +1,9 @@
 
 
+using Domain.Entities;
+
 namespace API.Dtos;
-    public class PrendaDto
+    public class PrendaDto : BaseEntity
     {
         public int IdPrenda { get; set; }
         public string Nombre { get; set; }

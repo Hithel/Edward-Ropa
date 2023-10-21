@@ -35,6 +35,16 @@ namespace API.Controllers;
         return mapper.Map<List<OrdenDto>>(entidad);
     }
 
+    [HttpGet("Consulta2B/{numero}")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<Object>>> GetPrendasProduccion(int numero)
+    {
+        var entidad = await unitofwork.Orden.GetPrendasProduccion(numero);
+        return mapper.Map<List<Object>>(entidad);
+    }
+
 
     [HttpGet]
     [MapToApiVersion("1.1")]
@@ -60,6 +70,22 @@ namespace API.Controllers;
         }
         return this.mapper.Map<OrdenDto>(entidad);
     }
+
+    [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Orden>> Post(OrdenDto entidadDto)
+        {
+            var entidad = this.mapper.Map<Orden>(entidadDto);
+            this.unitofwork.Orden.Add(entidad);
+            await unitofwork.SaveAsync();
+            if(entidad == null)
+            {
+                return BadRequest();
+            }
+            entidadDto.Id = entidad.Id;
+            return CreatedAtAction(nameof(Post), new {id = entidadDto.Id}, entidadDto);
+        }
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]

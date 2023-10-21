@@ -44,4 +44,21 @@ namespace Application.Repository;
         return await _context.Ventas
         .FirstOrDefaultAsync(p => p.Id == id);
     }
+
+    public async Task<IEnumerable<Object>> GetVentasEmpleado(int id)
+    {
+        var result = await (
+            from v in _context.Ventas
+            join e in _context.Empleados on v.IdEmpleadoFK equals e.Id
+            where e.Id == id
+            select new 
+            {
+                Id = v.Id,
+                fecha = v.Fecha,
+                FormaPago = v.FormaPago
+            }
+        ).ToListAsync();
+
+        return result;
+    }
 }

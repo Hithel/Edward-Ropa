@@ -1,7 +1,9 @@
 
 
+using Domain.Entities;
+
 namespace API.Dtos;
-    public class TipoPersonaDto
+    public class TipoPersonaDto : BaseEntity
     {
          public string Nombre { get; set; }
     }

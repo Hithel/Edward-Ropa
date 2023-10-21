@@ -1,7 +1,9 @@
 
 
+using Domain.Entities;
+
 namespace API.Dtos;
-    public class EstadoDto
+    public class EstadoDto : BaseEntity
     {
         public string Descripcion { get; set; }
         

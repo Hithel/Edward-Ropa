@@ -1,7 +1,9 @@
 
 
+using Domain.Entities;
+
 namespace API.Dtos;
-    public class DetalleOrdenDto
+    public class DetalleOrdenDto : BaseEntity
     {
         public int IdOrdenFK { get; set; }
         public int IdPrendaFk { get; set; }

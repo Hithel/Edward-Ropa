@@ -44,4 +44,27 @@ namespace Application.Repository;
         return await _context.Prendas
         .FirstOrDefaultAsync(p => p.Id == id);
     }
+
+    public async Task<IEnumerable<Object>> GetPrendasProteccion()
+    {
+        var result = await (
+            from p in _context.Prendas
+            join tp in _context.TipoProtecciones on p.IdTipoProteccionFk equals tp.Id
+            select new 
+            {
+                TipoProteccion = tp.Descripcion,
+                prendas = 
+                (
+                    from pe in _context.Prendas
+                    select new 
+                    {
+                        Prenda = p.Nombre
+                    }
+                ).ToList()
+            }
+        ).ToListAsync();
+
+        return result;
+
+    }
 }

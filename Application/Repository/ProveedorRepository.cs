@@ -44,4 +44,20 @@ namespace Application.Repository;
         return await _context.Proveedores
         .FirstOrDefaultAsync(p => p.Id == id);
     }
+
+    public async Task<IEnumerable<Object>> GetProveedorNatural()
+    {
+        var result = await (
+            from p in _context.Proveedores
+            join tp in _context.TipoPersonas on p.IdTipoPersonaFK equals tp.Id
+            where tp.Nombre == "Natural"
+            select new 
+            {
+                nombre = p.Nombre,
+                tipoPersona = tp.Nombre
+            }
+        ).ToListAsync();
+
+        return result;
+    }
 }

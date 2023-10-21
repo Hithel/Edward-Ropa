@@ -64,6 +64,23 @@ namespace API.Controllers;
         return this.mapper.Map<DetalleOrdenDto>(entidad);
     }
 
+    [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<DetalleOrden>> Post(DetalleOrdenDto entidadDto)
+        {
+            var entidad = this.mapper.Map<DetalleOrden>(entidadDto);
+            this.unitofwork.DetalleOrden.Add(entidad);
+            await unitofwork.SaveAsync();
+            if(entidad == null)
+            {
+                return BadRequest();
+            }
+            entidadDto.Id = entidad.Id;
+            return CreatedAtAction(nameof(Post), new {id = entidadDto.Id}, entidadDto);
+        }
+
+
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

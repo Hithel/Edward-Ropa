@@ -35,6 +35,16 @@ public class ProveedorController : ApiBaseController
         return mapper.Map<List<ProveedorDto>>(entidad);
     }
 
+    [HttpGet("Consulta1B")]
+    [MapToApiVersion("1.0")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<Object>>> GetProveedorNatural()
+    {
+        var entidad = await unitofwork.Proveedor.GetProveedorNatural();
+        return mapper.Map<List<Object>>(entidad);
+    }
+
 
     [HttpGet]
     [MapToApiVersion("1.1")]
@@ -60,6 +70,22 @@ public class ProveedorController : ApiBaseController
         }
         return this.mapper.Map<ProveedorDto>(entidad);
     }
+
+    [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Proveedor>> Post(ProveedorDto entidadDto)
+        {
+            var entidad = this.mapper.Map<Proveedor>(entidadDto);
+            this.unitofwork.Proveedor.Add(entidad);
+            await unitofwork.SaveAsync();
+            if(entidad == null)
+            {
+                return BadRequest();
+            }
+            entidadDto.Id = entidad.Id;
+            return CreatedAtAction(nameof(Post), new {id = entidadDto.Id}, entidadDto);
+        }
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]

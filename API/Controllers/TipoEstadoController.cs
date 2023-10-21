@@ -60,6 +60,21 @@ namespace API.Controllers;
         }
         return this.mapper.Map<TipoEstadoDto>(entidad);
     }
+    [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<TipoEstado>> Post(TipoEstadoDto entidadDto)
+        {
+            var entidad = this.mapper.Map<TipoEstado>(entidadDto);
+            this.unitofwork.TipoEstado.Add(entidad);
+            await unitofwork.SaveAsync();
+            if(entidad == null)
+            {
+                return BadRequest();
+            }
+            entidadDto.Id = entidad.Id;
+            return CreatedAtAction(nameof(Post), new {id = entidadDto.Id}, entidadDto);
+        }
 
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]

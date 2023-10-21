@@ -1,8 +1,10 @@
 
 
+using Domain.Entities;
+
 namespace API.Dtos;
 
-    public class InsumoPrendaDto
+    public class InsumoPrendaDto : BaseEntity
     {
         public int IdInsumoFK { get; set; }
 

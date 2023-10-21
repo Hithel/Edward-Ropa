@@ -1,7 +1,9 @@
 
 
+using Domain.Entities;
+
 namespace API.Dtos;
-    public class InventarioTallaDto
+    public class InventarioTallaDto : BaseEntity
     {
         public int IdInventarioFk { get; set; }
 

@@ -1,7 +1,9 @@
 
 
+using Domain.Entities;
+
 namespace API.Dtos;
-    public class InsumoDto
+    public class InsumoDto : BaseEntity
     {
         
         public string Nombre { get; set; }

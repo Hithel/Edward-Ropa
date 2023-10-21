@@ -1,7 +1,9 @@
 
 
+using Domain.Entities;
+
 namespace API.Dtos;
-    public class VentaDto
+    public class VentaDto : BaseEntity
     {
         public DateTime Fecha { get; set; }
         public int IdEmpleadoFK{ get; set; }
