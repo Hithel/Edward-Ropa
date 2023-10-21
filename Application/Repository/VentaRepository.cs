@@ -53,9 +53,17 @@ namespace Application.Repository;
             where e.Id == id
             select new 
             {
-                Id = v.Id,
-                fecha = v.Fecha,
-                FormaPago = v.FormaPago
+                Id = e.Id,
+                Nombre = e.Nombre,
+                Facturas = (
+                    from ve in _context.Ventas
+                    select new 
+                    {
+                        Id = ve.Id,
+                        Fecha = ve.Fecha,
+                        FormaPago = ve.FormaPago
+                    }
+                )
             }
         ).ToListAsync();
 

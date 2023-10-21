@@ -15,6 +15,50 @@ La gestión de los procesos se ve beneficiada con la capacidad de almacenar y ac
 
 ## 1. Endpoints 📝:
 
+1. Listar los proveedores que sean persona natural.
+
+
+URL
+
+http://localhost:5258/api/Proveedor/Consulta1B
+
+resultado
+
+![Alt text](image.png)
+
+
+
+2. Listar las prendas de una orden de producción cuyo estado sea en producción. El usuario debe ingresar el número de orden de producción.
+
+URL
+http://localhost:5258/api/Orden/Consulta2B/{numero}
+
+Resultado
+![Alt text](image-1.png)
+
+3. Listar las prendas agrupadas por el tipo de protección.
+
+URL
+http://localhost:5258/api/Prenda/Consulta3B
+
+Resultado
+![Alt text](image-2.png)
+
+7. Listar las ventas realizadas por un empleado especifico. El usuario debe ingresar el Id del empleado y mostrar la siguiente información.
+
+1. Id Empleado
+2. Nombre del empleado
+3. Fecturas : Nro Factura, fecha y total de la factura.
+
+
+URL
+http://localhost:5258/api/venta/Consulta7B/{id}
+
+
+Resultado 
+
+![Alt text](image-3.png)
+
 
 
 
